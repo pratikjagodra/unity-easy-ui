@@ -1,0 +1,13 @@
+{
+    "name": "com.pj.easy.ui",
+    "version": "1.0.0",
+    "displayName": "EasyUI",
+    "description": "A custom unity package for easy ui management.",
+    "unity": "2022.3",
+    "author": {
+        "name": "Pratik Jagodra"
+    },
+    "dependencies": {
+        "com.pj.easy.utils": "1.0.0"
+    }
+}

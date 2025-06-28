@@ -1,0 +1,16 @@
+{
+    "name": "PJ.Easy.UI",
+    "rootNamespace": "PJ.Easy.UI",
+    "references": [
+        "GUID:6eb24e5e885577d41bc7016e0c6b65b0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
