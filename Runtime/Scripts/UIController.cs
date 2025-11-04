@@ -4,15 +4,13 @@ using PJ.Easy.Utils;
 
 namespace PJ.Easy.UI
 {
-    public class UIController : SingletonMonoBehaviour<UIController>
+    public static class UIController
     {
-        [SerializeField] private UIBase[] screens;
+        private static Dictionary<System.Type, UIBase> currentScreens = new Dictionary<System.Type, UIBase>();
+        private static Stack<UIBase> stackedScreens = new Stack<UIBase>();
+        private static UIBase activeScreen;
 
-        private Dictionary<System.Type, UIBase> currentScreens = new Dictionary<System.Type, UIBase>();
-        private Stack<UIBase> stackedScreens = new Stack<UIBase>();
-        private UIBase activeScreen;
-
-        private T FindScreen<T>() where T : UIBase
+        private static T FindScreen<T>() where T : UIBase
         {
             if (currentScreens.ContainsKey(typeof(T)))
             {
@@ -26,20 +24,18 @@ namespace PJ.Easy.UI
             }
             else
             {
-                for (int i = 0; i < screens.Length; i++)
+                T screen = Object.FindAnyObjectByType<T>();
+                if (screen != null)
                 {
-                    if (screens[i] != null && screens[i].GetType() == typeof(T))
-                    {
-                        currentScreens.Add(typeof(T), (T)screens[i]);
-                        return (T)screens[i];
-                    }
+                    currentScreens.Add(typeof(T), screen);
+                    return screen;
                 }
             }
             Log(FIND_SCREEN, $"Can not find screen of type {typeof(T)}. Make sure it's scene object is reference");
             return null;
         }
 
-        public T ShowScreen<T>() where T : UIBase
+        public static T ShowScreen<T>() where T : UIBase
         {
             T screen = FindScreen<T>();
             screen.OnShowScreen();
@@ -65,7 +61,7 @@ namespace PJ.Easy.UI
             return screen;
         }
 
-        public T HideScreen<T>() where T : UIBase
+        public static T HideScreen<T>() where T : UIBase
         {
             T screen = FindScreen<T>();
             screen.OnHideScreen();
@@ -82,12 +78,12 @@ namespace PJ.Easy.UI
             return screen;
         }
 
-        public T GetScreen<T>() where T : UIBase
+        public static T GetScreen<T>() where T : UIBase
         {
             return FindScreen<T>();
         }
 
-        public bool IsActiveScreen(UIBase screen)
+        public static bool IsActiveScreen(UIBase screen)
         {
             if (activeScreen == null) return false;
 
