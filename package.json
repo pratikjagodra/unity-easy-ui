@@ -1,6 +1,6 @@
 {
     "name": "com.pj.easy.ui",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "displayName": "EasyUI",
     "description": "A custom unity package for easy ui management.",
     "unity": "2022.3",
